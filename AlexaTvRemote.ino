@@ -1,4 +1,6 @@
 
+#include "debug.h" 
+
 //Wifi connection 
 #include "WifiConnection.h" 
 
@@ -16,8 +18,8 @@ bool commandReceived = false;
 
 
 //SET YOUR WIFI CREDS 
-const char* myWifiSsid      = "****"; 
-const char* myWifiPassword  = "********";
+const char* myWifiSsid      = "***"; 
+const char* myWifiPassword  = "*******";
 
 //SET TO MATCH YOUR HARDWARE 
 #define SERIAL_BAUD_RATE    9600
@@ -90,6 +92,7 @@ void loop()
 //turn on/off the tv by sending IR command. This one is set for LG tv. 
 void toggleTv()
 {
+  DEBUG_PRINTLN("Sending IR command"); 
   irSend->sendLG(0x00FFE01FUL, 0); 
 }
 

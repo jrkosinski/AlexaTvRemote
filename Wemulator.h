@@ -25,6 +25,7 @@
 #include <functional>
 #include <vector>
 #include <ESP8266WiFi.h>
+#include "debug.h" 
 
 #define DEFAULT_TCP_BASE_PORT   52000
 #define UDP_MULTICAST_IP        IPAddress(239,255,255,250)

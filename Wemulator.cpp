@@ -14,7 +14,7 @@ Wemulator::Wemulator(unsigned int port)
 void Wemulator::sendUDPResponse(unsigned int deviceId) 
 {
   Wemulatoresp_device_t device = this->_devices[deviceId];
-  DEBUG_MSG_Wemulator("[Wemulator] UDP response for device #%d (%s)\n", _current, device.name);
+  DEBUG_PRINTF("[Wemulator] UDP response for device #%d (%s)\n", _current, device.name);
 
   char response[strlen(UDP_TEMPLATE) + 40];
   sprintf_P(response, UDP_TEMPLATE,
@@ -58,7 +58,7 @@ void Wemulator::handleUDPPacket(IPAddress remoteIP, unsigned int remotePort, uin
   if (!this->_enabled) 
     return;
 
-  //DEBUG_MSG_Wemulator("[Wemulator] Got UDP packet from %s\n", remoteIP.toString().c_str());
+  DEBUG_PRINTF("[Wemulator] Got UDP packet from %s\n", remoteIP.toString().c_str());
 
   data[len] = 0;
   String content = String((char *) data);
@@ -101,7 +101,7 @@ void Wemulator::handleTCPPacket(unsigned int deviceId, AsyncClient *client, void
 
   if (content.indexOf("GET /setup.xml") == 0) 
   {
-    DEBUG_MSG_Wemulator("[Wemulator] /setup.xml response for device #%d (%s)\n", deviceId, device.name);
+    DEBUG_PRINTF("[Wemulator] /setup.xml response for device #%d (%s)\n", deviceId, device.name);
 
     this->_devices[deviceId].hit = true;
     char response[strlen(SETUP_TEMPLATE) + 50];
@@ -165,7 +165,7 @@ AcConnectHandler Wemulator::getTCPClientHandler(unsigned int deviceId)
       }
     }
 
-    DEBUG_MSG_Wemulator("[Wemulator] Rejecting client - Too many connections already.\n");
+    DEBUG_PRINTLN("[Wemulator] Rejecting client - Too many connections already.\n");
 
     // We cannot accept this connection at the moment
     client->onDisconnect([](void *s, AsyncClient *c) {
