@@ -1,20 +1,14 @@
 
-#include "debug.h" 
-
-//Wifi connection 
-#include "WifiConnection.h" 
-
-//Our Wemo emulator 
-#include "Wemulator.h" 
-
-//IR library 
-#include <IRremoteESP8266.h>
+#include "debug.h"              // Serial debugger printing
+#include "WifiConnection.h"     // Wifi connection 
+#include "Wemulator.h"          // Our Wemo emulator 
+#include <IRremoteESP8266.h>    // IR library 
 
 
-WifiConnection* wifi; 
-Wemulator* wemulator;
-IRsend* irSend; 
-bool commandReceived = false;
+WifiConnection* wifi;           // wifi connection
+Wemulator* wemulator;           // wemo emulator
+IRsend* irSend;                 // infrared sender
+bool commandReceived = false;   // command flag
 
 
 //SET YOUR WIFI CREDS 
@@ -61,8 +55,14 @@ void setup()
     wemulator->addCommand("my television"); 
 
     //set the event handler for when a voice command is received 
-    wemulator->onMessage([](unsigned char device_id, const char * device_name, bool state) {
-      commandReceived = true;
+    wemulator->onMessage([](unsigned char device_id, const char * device_name, bool state) 
+    {
+      //the following is just to show that we don't care about state (i.e "on" or "off")
+      //since the command works as a toggle, it's the same command regardless of whether we say "turn on" or "turn off" 
+      if (state)
+        commandReceived = true;
+      else
+        commandReceived = true;
     });
   }
 }

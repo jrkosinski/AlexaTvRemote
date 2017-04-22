@@ -78,6 +78,7 @@ const char HEADERS[] PROGMEM =
     #define DEBUG_MSG_Wemulator(...)
 #endif
 
+//function callback signature 
 typedef std::function<void(unsigned char, const char *, bool)> TStateFunction;
 
 typedef struct {
@@ -87,6 +88,12 @@ typedef struct {
     AsyncServer * server;
 } Wemulatoresp_device_t;
 
+/****************************************
+ * Wemulator
+ * --------------
+ * Wemo Emulator; runs UDP and TCP listeners to communicate with Alexa, spoofing a Wemo Belkin device. 
+ * Uses async TCP for better performance. 
+ */
 class Wemulator 
 {
   private:

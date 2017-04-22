@@ -25,6 +25,7 @@ void debugPrint(int n)
 #endif
 }
 
+/*---------------------------------------*/
 void debugPrintf(const char* s, ...)
 {
 #ifdef DEBUG
