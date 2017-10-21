@@ -2,7 +2,7 @@
 #include "debug.h"              // Serial debugger printing
 #include "WifiConnection.h"     // Wifi connection 
 #include "Wemulator.h"          // Our Wemo emulator 
-#include <IRremoteESP8266.h>    // IR library 
+#include <IRsend.h>    // IR library 
 
 
 WifiConnection* wifi;           // wifi connection
@@ -11,7 +11,6 @@ IRsend* irSend;                 // infrared sender
 
 //This is used as a crude workaround for a threading issue
 bool commandReceived = false;   // command flag
-
 
 //SET YOUR WIFI CREDS 
 const char* myWifiSsid      = "***"; 
@@ -23,10 +22,8 @@ const char* myWifiPassword  = "*******";
 //PIN 0 is D3 ON THE CHIP 
 #define IR_PIN              0
 
-
 //turn on/off the tv by sending IR command
 void toggleTv();
-
 
 
 /*---------------------------------------*/
