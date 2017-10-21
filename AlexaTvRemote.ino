@@ -1,20 +1,23 @@
 
 #include "debug.h"              // Serial debugger printing
 #include "WifiConnection.h"     // Wifi connection 
-#include "Wemulator.h"          // Our Wemo emulator 
+//#include "Wemulator.h"          // Our Wemo emulator 
+#include "Wemulator.h"
+#include "WemoCallbackHandler.h"
 #include <IRsend.h>    // IR library 
 
 
 WifiConnection* wifi;           // wifi connection
-Wemulator* wemulator;           // wemo emulator
+//Wemulator* wemulator;           // wemo emulator
 IRsend* irSend;                 // infrared sender
+Wemulator* wemo;
 
 //This is used as a crude workaround for a threading issue
 bool commandReceived = false;   // command flag
 
 //SET YOUR WIFI CREDS 
-const char* myWifiSsid      = "***"; 
-const char* myWifiPassword  = "*******";
+const char* myWifiSsid      = "****"; 
+const char* myWifiPassword  = "*********";
 
 //SET TO MATCH YOUR HARDWARE 
 #define SERIAL_BAUD_RATE    9600
@@ -42,11 +45,18 @@ void setup()
   irSend->begin();
 
   //initialize wemo emulator 
-  wemulator = new Wemulator(); 
+  //wemulator = new Wemulator(); 
+  wemo = new Wemulator(); 
 
   //connect to wifi 
   if (wifi->connect())
   {
+    wemo->begin();
+    
+    wemo->addDevice("tv", 80, new WemoCallbackHandler(&commandReceived)); 
+    wemo->addDevice("television", 80, new WemoCallbackHandler(&commandReceived)); 
+
+    /*
     //start the wemo emulator (it runs as a series of webservers) 
     wemulator->addCommand("tv"); 
     wemulator->addCommand("television"); 
@@ -63,6 +73,7 @@ void setup()
       else
         commandReceived = true;
     });
+    */
   }
 }
 
@@ -74,12 +85,14 @@ void loop()
   //let the wemulator listen for voice commands 
   if (wifi->isConnected)
   {
-    wemulator->handle();
+    //wemulator->handle();
+    wemo->listen();
   }
 
   //if we've received a command, do the action 
   if (commandReceived)
   {
+    debugPrintln("COMMAND OUTGOING:");
     commandReceived = false; 
     toggleTv(); 
     delay(100); 
