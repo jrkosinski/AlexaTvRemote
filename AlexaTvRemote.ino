@@ -8,6 +8,8 @@
 WifiConnection* wifi;           // wifi connection
 Wemulator* wemulator;           // wemo emulator
 IRsend* irSend;                 // infrared sender
+
+//This is used as a crude workaround for a threading issue
 bool commandReceived = false;   // command flag
 
 
