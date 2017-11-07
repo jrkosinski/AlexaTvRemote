@@ -52,7 +52,7 @@ void doSetup()
   wifi->begin(); 
 
   //initialize the IR 
-  irSend = new IRsend(IR_PIN, false);
+  irSend = new IRsend(IR_PIN, true);
   irSend->begin();
 
   //initialize wemo emulator 
