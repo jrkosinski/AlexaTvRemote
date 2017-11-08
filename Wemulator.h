@@ -7,8 +7,17 @@
 #include <ESP8266WebServer.h>
 #include <functional> 
 
-#include "WemoServer.h"
 #include "Fauxmo.h"
+
+/****************************************
+ * IWemoCallbackHandler
+ * --------------------
+ */
+class IWemoCallbackHandler
+{
+  public:
+    virtual void handleCallback(int param);
+};
 
 /****************************************
  * Wemulator
@@ -41,19 +50,19 @@ class Wemulator
 };
 /****************************************/
 
-/*---------------------------------------*/
+// ************************************************************************************
 Wemulator::Wemulator()
 {
   this->_serverCount = 0;
   this->isRunning = false;
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 Wemulator::~Wemulator()
 {
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 void Wemulator::begin()
 {
   this->isRunning = false;
@@ -82,7 +91,7 @@ void Wemulator::begin()
   });
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 void Wemulator::listen()
 {
   if (!this->_enabled)
@@ -91,7 +100,7 @@ void Wemulator::listen()
   this->_fauxmo.handle();
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 void Wemulator::stop()
 {
 }
@@ -109,7 +118,7 @@ bool Wemulator::addDevice(const char* deviceName, int localPort, IWemoCallbackHa
   this->_deviceCount++; 
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 bool Wemulator::replaceDevice(const char* deviceName, const char* newDeviceName, IWemoCallbackHandler* callbackHandler)
 {
   if (!this->_enabled)
@@ -118,7 +127,7 @@ bool Wemulator::replaceDevice(const char* deviceName, const char* newDeviceName,
   return false;
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 int Wemulator::getDeviceIndexByName(const char* deviceName)
 {
   return -1; 

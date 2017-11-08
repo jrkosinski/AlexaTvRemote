@@ -31,29 +31,30 @@ void doSetup();
 void blinkLed(int, int);
 
 
-/*---------------------------------------*/
+// ************************************************************************************
 //Runs once, when device is powered on or code has just been flashed 
+//
 void setup()
 {
   //if set wrong, your serial debugger will not be readable 
   Serial.begin(SERIAL_BAUD_RATE);
-  
-  debugPrintln("setting pin mode");
-  //pinMode(LED_PIN, OUTPUT);
-  //digitalWrite(LED_PIN, HIGH);
+
+  //initialize the IR 
+  irSend = new IRsend(IR_PIN, true);
+  irSend->begin();
+  digitalWrite(IR_PIN, HIGH);
 
   doSetup();
 }
 
+// ************************************************************************************
+// do wifi and wemo emulator setup
+//
 void doSetup()
 {
   //initialize wifi connection 
   wifi = new WifiConnection(myWifiSsid, myWifiPassword); 
   wifi->begin(); 
-
-  //initialize the IR 
-  irSend = new IRsend(IR_PIN, true);
-  irSend->begin();
 
   //initialize wemo emulator 
   wemulator = new Wemulator(); 
@@ -71,8 +72,9 @@ void doSetup()
 }
 
 
-/*---------------------------------------*/
-//Runs constantly 
+// ************************************************************************************
+// Runs constantly 
+//
 void loop() 
 {
   if (!setupDone)
@@ -96,14 +98,19 @@ void loop()
 }
 
 
-/*---------------------------------------*/
-//turn on/off the tv by sending IR command. This one is set for LG tv. 
+// ************************************************************************************
+// turn on/off the tv by sending IR command. This one is set for LG tv (NEC protocol). 
+//
 void toggleTv()
 {
   debugPrintln("Sending IR command"); 
-  irSend->sendLG(0x00FFE01FUL, 64); 
+  //irSend->sendLG(0x00FFE01FUL, 32, 13); 
+  irSend->sendNEC(0x20DF10EF, 32, 3); 
 }
 
+// ************************************************************************************
+// blink the LED a given number of times 
+//
 void blinkLed(int count, int delayMs)
 {
   for(int n=0; n<count; n++)

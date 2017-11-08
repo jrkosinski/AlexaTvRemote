@@ -22,13 +22,13 @@ class WemoCallbackHandler : public IWemoCallbackHandler
 /****************************************/
 
 
-/*---------------------------------------*/
+// ************************************************************************************
  WemoCallbackHandler::WemoCallbackHandler(bool* pCmdReceived)
 {
   this->_pCmdReceived = pCmdReceived;
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 void WemoCallbackHandler::handleCallback(int param)
 {
   debugPrintln("got callback");

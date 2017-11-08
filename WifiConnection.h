@@ -36,7 +36,7 @@ class WifiConnection
 /****************************************/
 
 
-/*---------------------------------------*/
+// ************************************************************************************
 WifiConnection::WifiConnection(const char* ssid, const char* passwd)
 {
   this->isConnected = false;
@@ -44,14 +44,14 @@ WifiConnection::WifiConnection(const char* ssid, const char* passwd)
   this->_wifiPasswd = passwd; 
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 void WifiConnection::begin()
 {
   DEBUG_PRINTLN("Wifi:begin"); 
   this->_enabled = true; 
 }
 
-/*---------------------------------------*/
+// ************************************************************************************
 bool WifiConnection::connect()
 {
   DEBUG_PRINTLN(String("Wifi:connect ") + this->_wifiSsid + " / " + this->_wifiPasswd); 
