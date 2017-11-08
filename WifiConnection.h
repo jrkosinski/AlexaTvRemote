@@ -37,6 +37,12 @@ class WifiConnection
 
 
 // ************************************************************************************
+// constructor 
+//  
+// args:
+//  ssid: wifi username
+//  passwd: wifi password 
+// 
 WifiConnection::WifiConnection(const char* ssid, const char* passwd)
 {
   this->isConnected = false;
@@ -45,6 +51,8 @@ WifiConnection::WifiConnection(const char* ssid, const char* passwd)
 }
 
 // ************************************************************************************
+// initializes the instance and gets it ready to use; call once (in setup) 
+// 
 void WifiConnection::begin()
 {
   DEBUG_PRINTLN("Wifi:begin"); 
@@ -52,6 +60,10 @@ void WifiConnection::begin()
 }
 
 // ************************************************************************************
+// attempts to connect to the wifi 
+//
+// returns: true on successful connection 
+// 
 bool WifiConnection::connect()
 {
   DEBUG_PRINTLN(String("Wifi:connect ") + this->_wifiSsid + " / " + this->_wifiPasswd); 

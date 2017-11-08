@@ -9,16 +9,6 @@
 #define DEBUG_SHOWHEAP  debugShowHeap()
 #define DEBUG_PRINTF    debugPrintf
 
-/*
-#ifdef DEBUG
-  #define DEBUG_PRINT     debugPrint
-  #define DEBUG_PRINTLN   debugPrintln
-#else
-  #define DEBUG_PRINT     ;
-  #define DEBUG_PRINTLN   ;
-#endif
-*/
-
 void debugPrint(const char*); 
 void debugPrint(String&); 
 void debugPrint(int); 
@@ -32,6 +22,8 @@ void debugShowHeap();
 
 
 // ************************************************************************************
+// prints a msg 
+//
 void debugPrint(const char* s)
 {
 #ifdef DEBUG
@@ -40,6 +32,8 @@ void debugPrint(const char* s)
 }
 
 // ************************************************************************************
+// prints a msg 
+//
 void debugPrint(String& s)
 {
 #ifdef DEBUG
@@ -48,6 +42,8 @@ void debugPrint(String& s)
 }
 
 // ************************************************************************************
+// prints a numeric value 
+//
 void debugPrint(int n)
 {
 #ifdef DEBUG
@@ -56,6 +52,8 @@ void debugPrint(int n)
 }
 
 // ************************************************************************************
+// prints a msg with variable args
+//
 void debugPrintf(const char* s, ...)
 {
 #ifdef DEBUG
@@ -65,6 +63,8 @@ void debugPrintf(const char* s, ...)
 }
 
 // ************************************************************************************
+// prints a msg followed by a linebreak
+//
 void debugPrintln(const char* s)
 {
 #ifdef DEBUG
@@ -73,6 +73,8 @@ void debugPrintln(const char* s)
 }
 
 // ************************************************************************************
+// prints a msg followed by a linebreak
+//
 void debugPrintln(String& s)
 {
 #ifdef DEBUG
@@ -81,6 +83,8 @@ void debugPrintln(String& s)
 }
 
 // ************************************************************************************
+// prints a numeric value followed by a linebreak
+//
 void debugPrintln(int n)
 {
 #ifdef DEBUG
@@ -89,6 +93,8 @@ void debugPrintln(int n)
 }
 
 // ************************************************************************************
+// prints the current heapsize
+//
 void debugShowHeap()
 {
 #ifdef DEBUG

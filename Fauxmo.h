@@ -104,7 +104,6 @@ class Fauxmo
 
 
 
-/*---------------------------------------*/
 Fauxmo::Fauxmo(unsigned int port) 
 {
   this->_basePort = port;
@@ -113,7 +112,6 @@ Fauxmo::Fauxmo(unsigned int port)
   this->_udp.beginMulticast(WiFi.localIP(), UDP_MULTICAST_IP, UDP_MULTICAST_PORT);
 }
 
-/*---------------------------------------*/
 void Fauxmo::sendUDPResponse(unsigned int deviceId) 
 {
   fauxmoesp_device_t device = this->_devices[deviceId];
@@ -131,7 +129,6 @@ void Fauxmo::sendUDPResponse(unsigned int deviceId)
   udpClient.endPacket();
 }
 
-/*---------------------------------------*/
 void Fauxmo::nextUDPResponse() 
 {
   while (this->_roundsLeft) 
@@ -155,7 +152,6 @@ void Fauxmo::nextUDPResponse()
   }
 }
 
-/*---------------------------------------*/
 void Fauxmo::handleUDPPacket(IPAddress remoteIP, unsigned int remotePort, uint8_t *data, size_t len) 
 {
   if (!this->_enabled) 
@@ -187,7 +183,6 @@ void Fauxmo::handleUDPPacket(IPAddress remoteIP, unsigned int remotePort, uint8_
   }
 }
 
-/*---------------------------------------*/
 void Fauxmo::sendTCPPacket(AsyncClient *client, const char * response) 
 {
   char buffer[strlen(HEADERS) + strlen(response) + 10];
@@ -195,7 +190,6 @@ void Fauxmo::sendTCPPacket(AsyncClient *client, const char * response)
   client->write(buffer);
 }
 
-/*---------------------------------------*/
 void Fauxmo::handleTCPPacket(unsigned int deviceId, AsyncClient *client, void *data, size_t len) 
 {
   ((char * )data)[len] = 0;
@@ -232,7 +226,6 @@ void Fauxmo::handleTCPPacket(unsigned int deviceId, AsyncClient *client, void *d
   }
 }
 
-/*---------------------------------------*/
 AcConnectHandler Fauxmo::getTCPClientHandler(unsigned int deviceId) 
 {
   return [this, deviceId](void *s, AsyncClient * client) 
@@ -281,7 +274,6 @@ AcConnectHandler Fauxmo::getTCPClientHandler(unsigned int deviceId)
   };
 }
 
-/*---------------------------------------*/
 void Fauxmo::addDevice(const char * deviceName) 
 {
   fauxmoesp_device_t newDevice;
@@ -304,7 +296,6 @@ void Fauxmo::addDevice(const char * deviceName)
   this->_devices.push_back(newDevice);
 }
 
-/*---------------------------------------*/
 void Fauxmo::handle() 
 {
   int len = _udp.parsePacket();

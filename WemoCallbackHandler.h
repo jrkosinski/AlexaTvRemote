@@ -23,12 +23,16 @@ class WemoCallbackHandler : public IWemoCallbackHandler
 
 
 // ************************************************************************************
+// constructor; pass reference to a flag
+// 
  WemoCallbackHandler::WemoCallbackHandler(bool* pCmdReceived)
 {
   this->_pCmdReceived = pCmdReceived;
 }
 
 // ************************************************************************************
+// handles the callback; param is ignored 
+// 
 void WemoCallbackHandler::handleCallback(int param)
 {
   debugPrintln("got callback");

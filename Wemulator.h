@@ -51,6 +51,8 @@ class Wemulator
 /****************************************/
 
 // ************************************************************************************
+// constructor 
+// 
 Wemulator::Wemulator()
 {
   this->_serverCount = 0;
@@ -58,11 +60,14 @@ Wemulator::Wemulator()
 }
 
 // ************************************************************************************
+// destructor 
 Wemulator::~Wemulator()
 {
 }
 
 // ************************************************************************************
+// initializes the instance and gets it ready to use; call once (in setup) 
+// 
 void Wemulator::begin()
 {
   this->isRunning = false;
@@ -92,6 +97,8 @@ void Wemulator::begin()
 }
 
 // ************************************************************************************
+// listen for requests (call in every loop) 
+// 
 void Wemulator::listen()
 {
   if (!this->_enabled)
@@ -101,12 +108,23 @@ void Wemulator::listen()
 }
 
 // ************************************************************************************
+// stop listening 
+// 
 void Wemulator::stop()
 {
 }
 
-//TODO: localPort is ignored, so remove it 
-/*---------------------------------------*/
+// ************************************************************************************
+// adds a new listener for a new command 
+// 
+// args: 
+//  deviceName: the command for which to listen 
+//  localPort: deprecated, ignored 
+//  callbackHandler: object that will handle a request for the given device 
+//
+// returns: true on success 
+//
+// TODO: localPort is ignored, so remove it 
 bool Wemulator::addDevice(const char* deviceName, int localPort, IWemoCallbackHandler* callbackHandler)
 {
   if (!this->_enabled)
@@ -116,21 +134,6 @@ bool Wemulator::addDevice(const char* deviceName, int localPort, IWemoCallbackHa
   this->_fauxmo.addDevice(deviceName); 
   this->_callbackHandlers[this->_deviceCount] = callbackHandler;
   this->_deviceCount++; 
-}
-
-// ************************************************************************************
-bool Wemulator::replaceDevice(const char* deviceName, const char* newDeviceName, IWemoCallbackHandler* callbackHandler)
-{
-  if (!this->_enabled)
-    return false; 
-    
-  return false;
-}
-
-// ************************************************************************************
-int Wemulator::getDeviceIndexByName(const char* deviceName)
-{
-  return -1; 
 }
 
 #endif 
