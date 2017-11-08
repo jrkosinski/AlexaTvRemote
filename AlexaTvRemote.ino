@@ -101,7 +101,7 @@ void loop()
 void toggleTv()
 {
   debugPrintln("Sending IR command"); 
-  irSend->sendLG(0x00FFE01FUL, 0); 
+  irSend->sendLG(0x00FFE01FUL, 64); 
 }
 
 void blinkLed(int count, int delayMs)
