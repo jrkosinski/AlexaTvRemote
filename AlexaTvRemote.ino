@@ -9,7 +9,6 @@
 WifiConnection* wifi;           // wifi connection
 IRsend* irSend;                 // infrared sender
 Wemulator* wemulator;           // wemo emulator
-bool setupDone = false;
 
 //This is used as a crude workaround for a threading issue
 bool commandReceived = false;   // command flag
@@ -27,7 +26,6 @@ const char* myWifiPassword  = "HappyTime";
 
 //turn on/off the tv by sending IR command
 void toggleTv();
-void doSetup();
 void blinkLed(int, int);
 
 
@@ -63,8 +61,6 @@ void setup()
     wemulator->addDevice("tv", 80, new WemoCallbackHandler(&commandReceived)); 
     wemulator->addDevice("television", 81, new WemoCallbackHandler(&commandReceived)); 
     wemulator->addDevice("my tv", 82, new WemoCallbackHandler(&commandReceived)); 
-
-    setupDone = true;
   }
 }
 

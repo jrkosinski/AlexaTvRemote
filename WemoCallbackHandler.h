@@ -11,7 +11,6 @@
 class WemoCallbackHandler : public IWemoCallbackHandler 
 {
   private: 
-    int _sceneNo; 
     bool* _pCmdReceived;
     
   public: 
